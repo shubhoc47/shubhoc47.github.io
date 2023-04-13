@@ -41,7 +41,9 @@ xhr.onreadystatechange = function() {
                 document.getElementById('answerBox').value = ''; // Clear the answer box
             } else {
                 document.getElementById('feedback').textContent = 'Incorrect. Please try again.';
-                incorrectAnswers++;
+                if (answer !== "") {
+                    incorrectAnswers++;
+                }
                 correctInRow = 0;
             }
             document.getElementById('correctAnswers').textContent = `Correct Answers: ${correctAnswers}`;
