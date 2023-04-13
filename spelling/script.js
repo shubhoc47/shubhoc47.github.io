@@ -40,9 +40,8 @@ xhr.onreadystatechange = function() {
                 }, 500);
                 document.getElementById('answerBox').value = ''; // Clear the answer box
             } else if (answer !== "") {
-                    document.getElementById('feedback').textContent = 'Incorrect. Please try again.';
-                    incorrectAnswers++;
-                }
+                document.getElementById('feedback').textContent = 'Incorrect. Please try again.';
+                incorrectAnswers++;
                 correctInRow = 0;
             }
             document.getElementById('correctAnswers').textContent = `Correct Answers: ${correctAnswers}`;
