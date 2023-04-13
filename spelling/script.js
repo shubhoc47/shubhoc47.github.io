@@ -39,9 +39,8 @@ xhr.onreadystatechange = function() {
                     }
                 }, 500);
                 document.getElementById('answerBox').value = ''; // Clear the answer box
-            } else {
-                document.getElementById('feedback').textContent = 'Incorrect. Please try again.';
-                if (answer !== "") {
+            } else if (answer !== "") {
+                    document.getElementById('feedback').textContent = 'Incorrect. Please try again.';
                     incorrectAnswers++;
                 }
                 correctInRow = 0;
