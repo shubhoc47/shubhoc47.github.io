@@ -2,12 +2,23 @@ const xhr = new XMLHttpRequest();
 xhr.open("GET", "words1.txt", true);
 xhr.onreadystatechange = function() {
     if (xhr.readyState === 4 && xhr.status === 200) {
-        const words = xhr.responseText.split("\n"); // read words from txt file
+        let words = xhr.responseText.split("\n"); // read words from txt file
+        words = shuffleArray(words); // shuffle the words
+
         let currentWordIndex = -1; // current index of the word being tested
         let correctAnswers = 0; // number of correct answers
         let incorrectAnswers = 0; // number of incorrect answers
         let correctInRow = 0; // number of correct answers in a row
         const synth = window.speechSynthesis; // SpeechSynthesis API instance
+
+        // function to shuffle the array
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
         // function to pronounce a word
         function speakWord(word) {
@@ -17,10 +28,10 @@ xhr.onreadystatechange = function() {
 
         // function to check the answer
         function checkAnswer() {
-            const answer = document.getElementById('answerBox').value;
+            const answer = document.getElementById('answerBox').value.trim(); // remove leading/trailing spaces
             const first = words[currentWordIndex];
-            const word = first.slice(0,(first.length-1))
-            if (answer.toLowerCase() == word.toLowerCase()) {
+            const word = first.slice(0, (first.length - 1));
+            if (answer.toLowerCase() === word.toLowerCase()) {
                 document.getElementById('feedback').textContent = 'Correct!';
                 currentWordIndex++;
                 correctAnswers++;
@@ -39,7 +50,7 @@ xhr.onreadystatechange = function() {
                     }
                 }, 500);
                 document.getElementById('answerBox').value = ''; // Clear the answer box
-            } else if (answer !== "") {
+            } else if (answer !== '') {
                 document.getElementById('feedback').textContent = 'Incorrect. Please try again.';
                 incorrectAnswers++;
                 correctInRow = 0;
@@ -52,7 +63,7 @@ xhr.onreadystatechange = function() {
         // function to show the correct answer
         function showAnswer() {
             const first = words[currentWordIndex];
-            const word = first.slice(0,(first.length-1));
+            const word = first.slice(0, (first.length - 1));
             document.getElementById('feedback').textContent = `The correct answer is ${word}.`;
             incorrectAnswers++;
             correctInRow = 0;
@@ -74,30 +85,31 @@ xhr.onreadystatechange = function() {
 
         // event listener for the Show Answer button
         document.getElementById('showAnswerBtn').addEventListener('click', showAnswer);
-            // event listener for the Enter key in the answer box
-    document.getElementById('answerBox').addEventListener('keyup', function(event) {
-        if (event.keyCode === 13) {
-            event.preventDefault();
-            checkAnswer();
-        }
-    });
 
-}
+        // event listener for the Enter key in the answer box
+        document.getElementById('answerBox').addEventListener('keyup', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                checkAnswer();
+            }
+        });
+    }
 };
 xhr.send(); // send the GET request to retrieve the words.txt file
 
 // Function to reset the quiz
 function resetQuiz() {
-document.getElementById('feedback').textContent = 'Press Listen to start!';
-document.getElementById('correctAnswers').textContent = 'Correct Answers: 0';
-document.getElementById('incorrectAnswers').textContent = 'Incorrect Answers: 0';
-// document.getElementById('correctInRow').textContent = 'Correct in a Row: 0';
-document.getElementById('answerBox').value = '';
-currentWordIndex = -1;
-correctAnswers = 0;
-incorrectAnswers = 0;
-correctInRow = 0;
-synth.cancel();
+    document.getElementById('feedback').textContent = 'Press Listen to start!';
+    document.getElementById('correctAnswers').textContent = 'Correct Answers: 0';
+    document.getElementById('incorrectAnswers').textContent = 'Incorrect Answers: 0';
+    // document.getElementById('correctInRow').textContent = 'Correct in a Row: 0';
+    document.getElementById('answerBox').value = '';
+    currentWordIndex = -1;
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    correctInRow = 0;
+    synth.cancel();
 }
+
 // event listener for the Reset button
 document.getElementById('resetBtn').addEventListener('click', resetQuiz);
