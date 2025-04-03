@@ -1,271 +1,494 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>My Portfolio</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shubho Chowdhury - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Base styles */
+        body {
+            @apply bg-gray-50 text-gray-800;
+        }
+        .section-title {
+            @apply text-3xl font-bold text-gray-900 mb-12 text-center; /* Increased bottom margin */
+        }
+        .card {
+            @apply bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300;
+        }
+        .badge {
+            @apply inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-2 mb-1 px-2.5 py-0.5 rounded-full; /* Added bottom margin */
+        }
+        .link-style {
+             @apply text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium; /* Added font-medium */
+        }
+
+        /* ---- UPDATED STYLES ---- */
+        .skill-tag {
+            @apply inline-block bg-sky-100 text-sky-800 text-sm font-medium mr-2 mb-2 px-4 py-1 rounded-full transition-all duration-200 hover:bg-sky-200 hover:shadow-sm cursor-default transform hover:-translate-y-0.5; /* Added hover effects */
+        }
+        .section-subtitle {
+            @apply text-xl font-semibold text-gray-700 mb-5 flex items-center; /* Increased bottom margin & flex for icon */
+        }
+        .section-subtitle svg {
+             @apply w-5 h-5 mr-2 text-blue-600; /* Style for icons */
+        }
+        .achievement-item {
+             @apply flex items-start space-x-4 mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200; /* Added hover shadow */
+        }
+         .achievement-item svg {
+             @apply w-6 h-6 text-green-600 flex-shrink-0 mt-1;
+         }
+         .publication-item {
+             @apply mb-6 p-5 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200; /* Added hover shadow, padding */
+         }
+         .certificate-item {
+              @apply flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 shadow-sm mb-3 hover:shadow-md hover:border-gray-300 transition-all duration-200; /* Added hover effects */
+         }
+         .certificate-item svg {
+              @apply w-6 h-6 text-purple-600 mr-3 flex-shrink-0; /* Slightly larger icon */
+         }
+         /* --- END UPDATED STYLES --- */
+
+    </style>
 </head>
+<body class="antialiased">
 
-<body>
-    <div id="mobile-menu-open" class="shadow-large">
-        <i class="fa fa-bars" aria-hidden="true"></i>
-    </div>
-    <!-- End #mobile-menu-toggle -->
-    <header>
-        <div id="mobile-menu-close">
-            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div>
+                <a href="#home" class="text-xl font-bold text-gray-900">Shubho Chowdhury</a>
+            </div>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Home</a>
+                <a href="#skills" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Skills</a>
+                <a href="#projects" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Projects</a>
+                <a href="#experience" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Experience</a>
+                <a href="#publications" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Highlights</a> 
+                <a href="#education" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Education</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Contact</a>
+                <a href="Shubho_Chowdhury_CV.pdf" download="Shubho_Chowdhury_CV.pdf" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 shadow hover:shadow-md">Download Resume</a>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="md:hidden hidden px-6 pb-3 space-y-1">
+            <a href="#home" class="block text-gray-600 hover:text-gray-900 py-1">Home</a>
+            <a href="#skills" class="block text-gray-600 hover:text-gray-900 py-1">Skills</a>
+            <a href="#projects" class="block text-gray-600 hover:text-gray-900 py-1">Projects</a>
+            <a href="#experience" class="block text-gray-600 hover:text-gray-900 py-1">Experience</a>
+            <a href="#publications" class="block text-gray-600 hover:text-gray-900 py-1">Highlights</a>
+            <a href="#education" class="block text-gray-600 hover:text-gray-900 py-1">Education</a>
+            <a href="#contact" class="block text-gray-600 hover:text-gray-900 py-1">Contact</a>
+            <a href="Shubho_Chowdhury_CV.pdf" download="Shubho_Chowdhury_CV.pdf" class="block bg-blue-600 hover:bg-blue-700 text-white text-center px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 mt-2">Download Resume</a>
         </div>
-        <ul id="menu" class="shadow">
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#experience">Experience</a>
-            </li>
-            <li>
-                <a href="#education">Education</a>
-            </li>
-            <li>
-                <a href="#projects">Projects</a>
-            </li>
-            <li>
-                <a href="#skills">Skills</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-            <li>
-                <a href="./spelling/index.html">Spelling</a>
-            </li>
-        </ul>
     </header>
-    <!-- End header -->
 
-    <div id="lead">
-        <div id="lead-content">
-            <h1>Shubho Chowdhury</h1>
-            <h2>AI & Machine Learning Enthusiast | Experienced Programmer | Seeking MS in Computer Science</h2>
-            <a href="./docs/Shubho_Chowdhury_Resume.pdf" download class="btn-rounded-white">Download Resume</a>
-        </div>
-        <!-- End #lead-content -->
+    <main class="container mx-auto px-6 py-12">
 
-        <div id="lead-overlay"></div>
-
-        <div id="lead-down">
-            <span>
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </span>
-        </div>
-        <!-- End #lead-down -->
-    </div>
-    <!-- End #lead -->
-
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2 class="heading">About Me</h2>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                        As a recent graduate with a Bachelor of Science in Information Technology, I have honed my programming skills through multiple online and offline competitions, solving over 1000+ coding problems. As a senior programming executive at my university, I also arranged programming contests for students. My passion lies in Machine Learning, specifically Deep Learning, Reinforcement Learning, Federated Learning, and Graph Neural Networks. I am actively seeking opportunities to pursue a Master of Science degree in Computer Science with the ultimate goal of becoming a Machine Learning researcher at a leading organization. I am driven by the opportunity to explore new frontiers in AI research, and I am eager to connect with like-minded professionals in the field.
+        <!-- Home Section (No Changes) -->
+        <section id="home" class="min-h-[80vh] flex flex-col md:flex-row items-center justify-center text-center md:text-left py-16 md:py-24">
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Shubho Chowdhury: Software & Machine Learning Engineer
+                </h1>
+                <h2 class="text-xl md:text-2xl text-blue-700 font-semibold mb-6">
+                    Driving Innovation with Data
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                    Hello! I'm Shubho Chowdhury, a dedicated and results-oriented IT professional currently pursuing a Master of Information Technology at Central Queensland University, focusing on Software Development and Machine Learning. With a strong academic foundation (Bachelor's CGPA 3.91/4.00) and practical experience as a Junior Software Engineer, I possess a robust skill set encompassing Python, Java, C++, Deep Learning frameworks (Tensorflow), and web technologies (Django, HTML, CSS). My experience includes designing and training machine learning models (YOLOv5) for image processing, developing full-stack applications, and pioneering novel Federated Learning models for privacy-sensitive domains like finance and healthcare. I am passionate about leveraging technology to solve complex problems, evidenced by my published research and contributions to competitive programming and cybersecurity communities. I am actively seeking opportunities where I can apply my skills in Machine Learning, Computer Vision, and Software Development to create impactful solutions. Explore my work below!
                     </p>
+                <div class="space-x-4">
+                    <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-colors duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">View Projects</a>
+                    <a href="#contact" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-md font-medium transition-colors duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Contact Me</a>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- End #about -->
+            <div class="md:w-1/3 flex justify-center">
+                <img src="https://placehold.co/400x400/E2E8F0/AAAAAA?text=Your+Photo" alt="Shubho Chowdhury - Professional Photo Placeholder" class="rounded-full shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white">
+                </div>
+        </section>
 
-    <!-- <div id="experience" class="background-alt">
-        <h2 class="heading">Experience</h2>
-        <div id="experience-timeline">
-            <div data-date="September 2015 – September 2016">
-                <h3>Employer Name</h3>
-                <h4>Job Title</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat.
-                </p>
-            </div>
+        <!-- Skills Section (REVISED) -->
+        <section id="skills" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="max-w-5xl mx-auto space-y-10">
 
-            <div data-date="September 2015 – September 2016">
-                <h3>Employer Name</h3>
-                <h4>Job Title</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat.
-                </p>
-            </div>
-
-            <div data-date="September 2015 – September 2016">
-                <h3>Employer Name</h3>
-                <h4>Job Title</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat.
-                </p>
-            </div>
-        </div>
-    </div> -->
-    <!-- End #experience -->
-
-    <div id="education">
-        <h2 class="heading">Education</h2>
-        <div class="education-block">
-            <h3>University of Information Technology & Sciences</h3>
-            <span class="education-date">Jan 2019 - Fed 2023</span>
-            <h4>Bachelor of Science in Computer Science</h4>
-            <p>
-                Throughout my academic journey, I have left no stone unturned. From completing a rigorous Bachelor of Science in Engineering program at UITS with a stellar CGPA of 3.93 to actively participating and organizing both online and offline competitive programming contests, I have constantly challenged myself to reach new heights. I have been honored to be a question setter for multiple cyber security contests, including one for the prestigious organization RedHat. As a Senior Programming Executive, I have honed my skills in leadership, communication, and problem-solving. Artificial Intelligence, Deep Learning, Federated Learning, Graph Neural Networks, and Reinforcement learning are just a few examples of the fields that have captured my imagination and motivated me to continue learning and growing as a professional.   
-            </p>
-        </div>
-        <!-- End .education-block -->
-
-        <!-- <div class="education-block">
-            <h3>University of Ottawa</h3>
-            <span class="education-date">Sept 2016 - Sept 2017</span>
-            <h4>Bachelor of Science in Computer Science</h4>
-            <ul>
-                <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </li>
-                <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </li>
-                <li>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                </li>
-            </ul>
-        </div>
-        <!-- End .education-block -->
-    </div> -->
-    <!-- End #education -->
-
-    <div id="projects" class="background-alt">
-        <h2 class="heading">Projects</h2>
-        <div class="container">
-            <div class="row">
-                <div class="project shadow-large">
-                    <div class="project-image">
-                        <img src="images/project.jpg" />
+                <div>
+                    <h3 class="section-subtitle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+                        Programming Languages
+                    </h3>
+                    <div class="flex flex-wrap gap-y-1">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">HTML</span>
+                        <span class="skill-tag">CSS</span>
                     </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Project Name Here</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat.
+                </div>
+
+                <div>
+                    <h3 class="section-subtitle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-template"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>
+                        Web & Frameworks
+                    </h3>
+                    <div class="flex flex-wrap gap-y-1">
+                        <span class="skill-tag">Django</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-subtitle">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-circuit"><path d="M12 4a8 8 0 0 0-6.81 11.2"/><path d="M12 4a8 8 0 0 1 6.81 11.2"/><path d="M12 21a8.01 8.01 0 0 0 6.81-11.2"/><path d="M12 21a8.01 8.01 0 0 1-6.81-11.2"/><path d="M5.19 11.2a8.01 8.01 0 0 1 13.62 0"/><path d="M5.19 12.8a8.01 8.01 0 0 0 13.62 0"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="4" r="1"/><circle cx="19.07" cy="7.93" r="1"/><circle cx="19.07" cy="16.07" r="1"/><circle cx="12" cy="20" r="1"/><circle cx="4.93" cy="16.07" r="1"/><circle cx="4.93" cy="7.93" r="1"/></svg>
+                        Machine Learning / AI
+                    </h3>
+                    <div class="flex flex-wrap gap-y-1">
+                        <span class="skill-tag">Deep Learning</span>
+                        <span class="skill-tag">Tensorflow</span>
+                        <span class="skill-tag">Image Processing</span>
+                        <span class="skill-tag">YOLOv5</span>
+                        <span class="skill-tag">LangChain</span>
+                        <span class="skill-tag">ComfyUI</span>
+                        <span class="skill-tag">Stable Diffusion</span>
+                        <span class="skill-tag">Federated Learning</span>
+                    </div>
+                </div>
+
+                <div>
+                     <h3 class="section-subtitle">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                        Databases
+                    </h3>
+                    <div class="flex flex-wrap gap-y-1">
+                        <span class="skill-tag">MySQL <span class="text-xs text-sky-600 font-normal">(Inferred)</span></span> 
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-subtitle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal-square"><path d="M7 11v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2"/><path d="M11 11V9"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
+                        Tools & Platforms
+                    </h3>
+                    <div class="flex flex-wrap gap-y-1">
+                        <span class="skill-tag">Git & GitHub</span>
+                        <span class="skill-tag">Maven <span class="text-xs text-sky-600 font-normal">(Inferred)</span></span>
+                        <span class="skill-tag">JavaFX <span class="text-xs text-sky-600 font-normal">(Inferred)</span></span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="section-subtitle">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-braces"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
+                        Core Concepts
+                    </h3>
+                    <div class="flex flex-wrap gap-y-1">
+                        <span class="skill-tag">Data Structures</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Projects Section (No Changes to Structure) -->
+        <section id="projects" class="py-16 md:py-24">
+            <h2 class="section-title">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="card flex flex-col">
+                    <img src="https://placehold.co/600x400/E0F2FE/3B82F6?text=Biosensor+Project" alt="Biosensor Project Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Biosensor with Deep Learning</h3>
+                    <p class="text-gray-700 mb-4 text-sm flex-grow">Designed a highly sensitive multi-channel SPR-PCF based biosensor. Collected data and trained a DL model to predict six key optical properties. Published findings in a Q1 journal.</p>
+                     <div class="mt-auto pt-4 border-t border-gray-200">
+                        <span class="badge">Deep Learning</span> <span class="badge">Biosensor Design</span> <span class="badge">Python</span> <span class="badge">Q1 Publication</span>
+                        <div class="mt-3">
+                            <a href="[Link to Publication]" target="_blank" rel="noopener noreferrer" class="link-style mr-4 text-sm">Publication</a>
+                            <a href="[Link to GitHub Repo, if applicable]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card flex flex-col">
+                     <img src="https://placehold.co/600x400/D1FAE5/10B981?text=Open+Banking+FL" alt="Open Banking FL Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Open Banking with Federated Learning</h3>
+                    <p class="text-gray-700 mb-4 text-sm flex-grow">Pioneered a robust federated learning model for the banking sector using financial data, ensuring privacy-preserving, scalable, and secure analysis. Advanced open banking via cutting-edge FL techniques.</p>
+                    <div class="mt-auto pt-4 border-t border-gray-200">
+                        <span class="badge">Federated Learning</span> <span class="badge">FinTech</span> <span class="badge">Privacy-Preserving AI</span> <span class="badge">Python</span>
+                         <div class="mt-3">
+                            <a href="[Link to GitHub Repo, if applicable]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="card flex flex-col">
+                    <img src="https://placehold.co/600x400/EDE9FE/8B5CF6?text=Sleep+Apnea+FL" alt="Sleep Apnea FL Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Sleep Apnea Detection with Federated Learning</h3>
+                    <p class="text-gray-700 mb-4 text-sm flex-grow">Designed a novel federated learning model using ECG data to detect sleep apnea. Enabled privacy-preserving, scalable analysis across distributed datasets with enhanced accuracy via advanced ML techniques.</p>
+                    <div class="mt-auto pt-4 border-t border-gray-200">
+                        <span class="badge">Federated Learning</span> <span class="badge">Healthcare AI</span> <span class="badge">ECG Analysis</span> <span class="badge">Python</span> <span class="badge">Tensorflow</span>
+                        <div class="mt-3">
+                            <a href="[Link to GitHub Repo, if applicable]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
+                             </div>
+                    </div>
+                </div>
+
+                <div class="card flex flex-col">
+                    <img src="https://placehold.co/600x400/FEF3C7/F59E0B?text=Family+Support+System" alt="Family Support System Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Family Support System</h3>
+                    <p class="text-gray-700 mb-4 text-sm flex-grow">JavaFX desktop application for registering families, managing events, and secure user authentication using encrypted client-server communication.</p>
+                    <div class="mt-auto pt-4 border-t border-gray-200">
+                        <span class="badge">Java</span> <span class="badge">JavaFX</span> <span class="badge">MySQL</span> <span class="badge">Maven</span> <span class="badge">Desktop App</span>
+                        <div class="mt-3">
+                            <a href="[Link to GitHub Repo]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card flex flex-col">
+                    <img src="https://placehold.co/600x400/FEE2E2/EF4444?text=Neural+Style+Transfer" alt="Neural Style Transfer Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Neural Style Transfer</h3>
+                    <p class="text-gray-700 mb-4 text-sm flex-grow">Applied artistic styles to images, videos, and webcam feeds. Utilized neural style transfer to create cartoon-like images.</p>
+                    <div class="mt-auto pt-4 border-t border-gray-200">
+                        <span class="badge">Deep Learning</span> <span class="badge">Computer Vision</span> <span class="badge">Python</span> <span class="badge">Style Transfer</span>
+                        <div class="mt-3">
+                            <a href="[Link to GitHub Repo]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card flex flex-col">
+                    <img src="https://placehold.co/600x400/DBEAFE/3B82F6?text=Traffic+Sign+Detection" alt="Traffic Sign Detection Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Traffic Signs Detection</h3>
+                    <p class="text-gray-700 mb-4 text-sm flex-grow">A deep learning guide/project for classifying traffic signs in images, relevant for autonomous vehicles and road safety applications.</p>
+                    <div class="mt-auto pt-4 border-t border-gray-200">
+                        <span class="badge">Deep Learning</span> <span class="badge">Computer Vision</span> <span class="badge">Python</span> <span class="badge">Image Classification</span>
+                         <div class="mt-3">
+                            <a href="[Link to GitHub Repo]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div> </section>
+
+        <!-- Experience Section (No Changes) -->
+        <section id="experience" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="card mb-8">
+                    <div class="flex justify-between items-start mb-2 flex-wrap"> 
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">Junior Software Engineer</h3>
+                            <p class="text-gray-700">REEA Digital Limited</p>
+                            <p class="text-sm text-gray-500">Dhaka, Bangladesh</p>
+                        </div>
+                        <span class="text-sm text-gray-600 font-medium mt-2 sm:mt-0">July 2023 – Jan 2024</span> 
+                    </div>
+                     <ul class="list-disc list-inside text-gray-700 space-y-2 mt-4">
+                        <li>Designed and trained YOLOv5 machine learning models for image processing tasks, including dataset creation and optimization.</li>
+                        <li>Integrated LangChain for developing language model applications.</li>
+                        <li>Supported proof-of-concept projects utilizing ComfyUI and Stable Diffusion.</li>
+                        <li>Collaborated effectively on developing and deploying scalable machine learning solutions.</li>
+                        </ul>
+                </div>
+                </div>
+        </section>
+
+        <!-- Publications, Achievements & Certificates Section (REVISED) -->
+        <section id="publications" class="py-16 md:py-24">
+             <h2 class="section-title">Highlights & Achievements</h2> 
+             <div class="max-w-4xl mx-auto space-y-16"> 
+
+                 <div>
+                     <h3 class="section-subtitle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/><path d="M6 8h2"/><path d="M6 12h2"/><path d="M16 8h2"/><path d="M16 12h2"/></svg>
+                        Publications
+                     </h3>
+                     <div class="space-y-6"> 
+                        <div class="publication-item">
+                             <p class="text-gray-800 font-semibold mb-1.5"> 
+                                "A highly sensitive multi-channel SPR-PCF based biosensor with deep learning prediction approach"
+                             </p>
+                             <p class="text-sm text-gray-600 mb-3"> 
+                                Published in a Q1 Journal - Demonstrates expertise in biosensor design, data modeling, and applying deep learning to predict complex optical properties.
+                             </p>
+                             <a href="[Link to Publication]" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-style bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-md transition-colors duration-200"> 
+                                View Publication
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right ml-1.5"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                             </a>
+                        </div>
+                         <div class="publication-item">
+                             <p class="text-gray-800 font-semibold">Research Article Under Review</p>
+                             <p class="text-sm text-gray-600 mt-1">Currently undergoing peer review, further showcasing ongoing research contributions.</p>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div>
+                     <h3 class="section-subtitle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                        Achievements & Contributions
+                     </h3>
+                     <div class="space-y-5"> 
+                         <div class="achievement-item">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                             <div>
+                                 <p class="text-gray-800 font-medium">1000+ Coding Problems Solved</p>
+                                 <p class="text-sm text-gray-600 mt-1">Demonstrated strong problem-solving skills and proficiency in algorithms and data structures across platforms like LeetCode & StopStalk.</p>
+                                 <div class="mt-2">
+                                     <a href="https://leetcode.com/u/shubho_chowdhury/" target="_blank" rel="noopener noreferrer" class="link-style text-sm mr-4">LeetCode Profile</a>
+                                     <a href="https://www.stopstalk.com/user/profile/Shubho_c47" target="_blank" rel="noopener noreferrer" class="link-style text-sm">StopStalk Profile</a>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="achievement-item">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                             <div>
+                                 <p class="text-gray-800 font-medium">Active Competitive Programmer</p>
+                                 <p class="text-sm text-gray-600 mt-1">Participated in numerous online and onsite competitive programming contests, honing algorithmic thinking and coding efficiency under pressure.</p>
+                             </div>
+                         </div>
+                         <div class="achievement-item">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg>
+                             <div>
+                                 <p class="text-gray-800 font-medium">Contest Question Setter (University)</p>
+                                 <p class="text-sm text-gray-600 mt-1">Developed challenging problems for university-level competitive programming contests, contributing to the local coding community.</p>
+                             </div>
+                         </div>
+                         <div class="achievement-item">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
+                             <div>
+                                <p class="text-gray-800 font-medium">Question Setter (DEF CON CTF)</p>
+                                <p class="text-sm text-gray-600 mt-1">Contributed questions to an international online cybersecurity Capture The Flag competition, engaging with the global security community.</p>
+                             </div>
+                         </div>
+                    </div>
+                 </div>
+
+                 <div>
+                     <h3 class="section-subtitle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+                        Certificates
+                     </h3>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                         <div class="certificate-item group"> 
+                            <div class="flex items-center flex-grow mr-4"> 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
+                                <span class="text-gray-800 font-medium ml-3">Python Django - The Practical Guide</span> 
+                            </div>
+                            <a href="[Link to Certificate Django]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap">View Certificate</a> 
+                         </div>
+                         <div class="certificate-item group">
+                            <div class="flex items-center flex-grow mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
+                                <span class="text-gray-800 font-medium ml-3">Convolutional Neural Networks</span>
+                            </div>
+                             <a href="[Link to Certificate CNN]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap">View Certificate</a>
+                         </div>
+                         <div class="certificate-item group">
+                             <div class="flex items-center flex-grow mr-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
+                                <span class="text-gray-800 font-medium ml-3">Neural Networks and Deep Learning</span>
+                             </div>
+                             <a href="[Link to Certificate NN & DL]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap">View Certificate</a>
+                         </div>
+                    </div>
+                 </div>
+             </div>
+        </section>
+
+        <!-- Education Section (No Changes) -->
+        <section id="education" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg">
+            <h2 class="section-title">Education</h2>
+            <div class="max-w-3xl mx-auto space-y-8">
+                 <div class="card">
+                    <h3 class="text-xl font-semibold text-gray-800">Master of Information Technology</h3>
+                    <p class="text-gray-700">Central Queensland University, Sydney, Australia</p>
+                    <p class="text-sm text-gray-600 mb-2">Feb 2024 – Present</p>
+                    <p class="text-gray-700">Focus Areas: Software Development and Machine Learning</p>
+                    </div>
+                 <div class="card">
+                    <h3 class="text-xl font-semibold text-gray-800">Bachelor of Information Technology</h3>
+                    <p class="text-gray-700">University of Information Technology and Sciences (UITS), Dhaka, Bangladesh</p>
+                    <p class="text-sm text-gray-600 mb-2">Jan 2019 – Mar 2023</p>
+                    <p class="text-gray-700 font-medium">CGPA: 3.91 / 4.00</p>
+                     </div>
+            </div>
+        </section>
+
+        <!-- Contact Section (No Changes) -->
+        <section id="contact" class="py-16 md:py-24">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-lg text-gray-700 mb-8">
+                    I'm passionate about leveraging technology to build innovative solutions and currently seeking opportunities in Software Development and Machine Learning. Feel free to reach out!
+                </p>
+                <div class="space-y-4">
+                    <p class="text-gray-800">
+                        <strong class="font-medium">Email:</strong> <a href="mailto:shubhoc47@gmail.com" class="link-style">shubhoc47@gmail.com</a>
+                         </p>
+                    <p class="text-gray-800">
+                        <strong class="font-medium">Location:</strong> Campsie, NSW, Australia <span class="text-sm text-gray-500">(City/State only)</span>
                         </p>
-                        <a href="#">View Project</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End .project -->
-
-                <div class="project shadow-large">
-                    <div class="project-image">
-                        <img src="images/project.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Project Name Here</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur in iaculis ex. Etiam volutpat laoreet urna. Morbi ut tortor nec nulla commodo malesuada sit amet vel lacus. Fusce eget efficitur libero. Morbi dapibus porta quam laoreet placerat.
-                        </p>
-                        <a href="#">View Project</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End .project -->
-            </div>
-        </div>
-    </div>
-    <!-- End #projects -->
-
-    <div id="skills">
-        <h2 class="heading">Skills</h2>
-        <ul>
-            <li>JavaScript</li>
-            <li>Python</li>
-            <li>Java</li>
-            <li>C</li>
-            <li>C#</li>
-            <li>C++</li>
-            <li>Deep Learning</li>
-        </ul>
-    </div>
-
-    <div id="skills">
-        <h2 class="heading">Interests</h2>
-        <ul>
-            <li>Deep Learning</li>
-            <li>Computer vision</li>
-            <li>Natural Language Processing</li>
-            <li>Block Chain</li>
-        </ul>
-    </div>
-    <!-- End #skills -->
-
-    <div id="contact">
-        <h2>Get in Touch</h2>
-        <div id="contact-form">
-            <form action="https://formspree.io/f/xayvvnjk" method="POST">
-                <input type="hidden" name="_subject" value="Contact request from personal website" />
-                <input type="email" name="_replyto" placeholder="Your email" required>
-                <textarea name="message" placeholder="Your message" required></textarea>
-                <button type="submit">Send</button>
-            </form>
-        </div>
-        <!-- End #contact-form -->
-    </div>
-    <!-- End #contact -->
-
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-5 copyright">
-                    <p>
-                        Copyright &copy; <span id="current-year">2022</span> YOUR NAME
-                    </p>
-                </div>
-                <div class="col-sm-2 top">
-                    <span id="to-top">
-                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div class="col-sm-5 social">
-                    <ul>
-                        <li>
-                            <a href="https://github.com/" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://stackoverflow.com/" target="_blank"><i class="fa fa-stack-overflow" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://linkedin.com/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://plus.google.com/" target="_blank"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
+                    <div class="flex justify-center space-x-6 pt-4">
+                         <a href="https://linkedin.com/in/shubho-chowdhury-54137218a" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-700 transition-colors duration-200 transform hover:scale-110">
+                             <span class="sr-only">LinkedIn</span>
+                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                         </a>
+                          <a href="https://github.com/shubhoc47" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 transform hover:scale-110">
+                             <span class="sr-only">GitHub</span>
+                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.201 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.309.678.92.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
+                         </a>
+                         </div>
                 </div>
             </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4 flex justify-center space-x-6">
+                 <a href="https://linkedin.com/in/shubho-chowdhury-54137218a" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">LinkedIn</a>
+                 <a href="https://github.com/shubhoc47" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">GitHub</a>
+                 <a href="https://leetcode.com/u/shubho_chowdhury/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">LeetCode</a>
+                 <a href="https://www.stopstalk.com/user/profile/Shubho_c47" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">StopStalk</a>
+            </div>
+            <p class="text-sm">© <span id="current-year"></span> Shubho Chowdhury. All rights reserved.</p>
         </div>
     </footer>
-    <!-- End footer -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/scripts.min.js"></script>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Basic Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                     mobileMenu.classList.add('hidden');
+                });
+            });
+        }
+    </script>
+
 </body>
-
 </html>
