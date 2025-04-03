@@ -11,97 +11,129 @@
     <style type="text/tailwindcss">
         body {
             font-family: 'Inter', sans-serif;
+            @apply bg-gray-50 text-gray-800 antialiased overflow-x-hidden; /* Added overflow-x-hidden for safety */
         }
         /* Smooth scrolling */
         html {
             scroll-behavior: smooth;
         }
-        /* Base styles */
-        body {
-            @apply bg-gray-50 text-gray-800;
-        }
+
+        /* --- BASE STYLES --- */
         .section-title {
-            @apply text-3xl font-bold text-gray-900 mb-12 text-center; /* Increased bottom margin */
+            @apply text-3xl md:text-4xl font-bold text-gray-900 mb-12 text-center; /* Adjusted size */
         }
         .card {
-            @apply bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300;
+            @apply bg-white rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300 ease-in-out;
+            @apply hover:shadow-xl hover:-translate-y-1; /* Enhanced card hover */
         }
         .badge {
-            @apply inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-2 mb-1 px-2.5 py-0.5 rounded-full; /* Added bottom margin */
+             @apply inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-2 mb-1 px-2.5 py-0.5 rounded-full transition-colors duration-200;
+             @apply hover:bg-blue-200 hover:text-blue-900 cursor-default; /* Added hover to badges */
         }
         .link-style {
-             @apply text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium; /* Added font-medium */
+             @apply text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium;
+             @apply relative after:content-[''] after:absolute after:w-full after:h-[2px] after:bottom-0 after:left-0 after:bg-blue-600 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-300 after:ease-out; /* Underline effect */
+             @apply hover:after:scale-x-100; /* Underline effect on hover */
         }
+        .button-primary {
+            @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+        }
+         .button-secondary {
+            @apply bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-md font-medium transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+         }
 
-        /* ---- UPDATED STYLES ---- */
+        /* --- SKILLS SECTION STYLES --- */
         .skill-tag {
-            @apply inline-block bg-sky-100 text-sky-800 text-sm font-medium mr-2 mb-2 px-4 py-1 rounded-full transition-all duration-200 hover:bg-sky-200 hover:shadow-sm cursor-default transform hover:-translate-y-0.5; /* Added hover effects */
+            @apply inline-block bg-sky-100 text-sky-800 text-sm font-medium mr-2 mb-2 px-4 py-1 rounded-full transition-all duration-300 ease-out;
+            @apply hover:bg-sky-200 hover:shadow-md cursor-default transform hover:scale-105; /* Enhanced hover */
         }
         .section-subtitle {
-            @apply text-xl font-semibold text-gray-700 mb-5 flex items-center; /* Increased bottom margin & flex for icon */
+            @apply text-xl font-semibold text-gray-700 mb-5 flex items-center;
         }
         .section-subtitle svg {
-             @apply w-5 h-5 mr-2 text-blue-600; /* Style for icons */
+             @apply w-5 h-5 mr-2 text-blue-600 transition-transform duration-300 group-hover:scale-110; /* Added group-hover effect */
         }
-        .achievement-item {
-             @apply flex items-start space-x-4 mb-4 p-4 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200; /* Added hover shadow */
+
+        /* --- HIGHLIGHTS SECTION STYLES --- */
+        .achievement-item, .publication-item, .certificate-item {
+             @apply bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-300 ease-out;
+             @apply hover:shadow-lg hover:border-gray-300 transform hover:-translate-y-1; /* Consistent hover lift */
         }
-         .achievement-item svg {
-             @apply w-6 h-6 text-green-600 flex-shrink-0 mt-1;
+        .achievement-item { @apply flex items-start space-x-4 mb-4 p-4; }
+        .achievement-item svg { @apply w-6 h-6 text-green-600 flex-shrink-0 mt-1 transition-transform duration-300 group-hover:rotate-6; } /* Added icon rotate */
+        .publication-item { @apply mb-6 p-5; }
+        .certificate-item { @apply flex items-center justify-between p-4 mb-3; }
+        .certificate-item svg { @apply w-6 h-6 text-purple-600 mr-3 flex-shrink-0 transition-transform duration-300 group-hover:scale-110; } /* Added icon scale */
+
+        /* --- PROJECT CARD IMAGE HOVER --- */
+        .project-card img {
+            @apply transition-transform duration-300 ease-in-out;
+        }
+        .project-card:hover img {
+            @apply scale-105;
+        }
+
+         /* --- SCROLL ANIMATION STYLES --- */
+         .animate-on-scroll {
+             @apply opacity-0 transition-all duration-700 ease-out;
          }
-         .publication-item {
-             @apply mb-6 p-5 bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-200; /* Added hover shadow, padding */
+         .animate-fade-in { @apply animate-on-scroll; }
+         .animate-slide-up { @apply animate-on-scroll translate-y-6; } /* Start slightly lower */
+         .animate-slide-left { @apply animate-on-scroll translate-x-6; } /* Start slightly to the right */
+         .animate-slide-right { @apply animate-on-scroll -translate-x-6; } /* Start slightly to the left */
+
+         .animate-on-scroll.is-visible {
+             @apply opacity-100 translate-y-0 translate-x-0;
          }
-         .certificate-item {
-              @apply flex items-center justify-between p-4 bg-white rounded-lg border border-gray-200 shadow-sm mb-3 hover:shadow-md hover:border-gray-300 transition-all duration-200; /* Added hover effects */
-         }
-         .certificate-item svg {
-              @apply w-6 h-6 text-purple-600 mr-3 flex-shrink-0; /* Slightly larger icon */
-         }
-         /* --- END UPDATED STYLES --- */
+         /* Staggered Delays (Optional but nice for lists/grids) */
+         .delay-100 { transition-delay: 100ms !important; } /* Use !important carefully, helps override base delay */
+         .delay-200 { transition-delay: 200ms !important; }
+         .delay-300 { transition-delay: 300ms !important; }
+         .delay-400 { transition-delay: 400ms !important; }
+         .delay-500 { transition-delay: 500ms !important; }
 
     </style>
 </head>
-<body class="antialiased">
+<body> 
 
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50 transition-shadow duration-300">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div>
-                <a href="#home" class="text-xl font-bold text-gray-900">Shubho Chowdhury</a>
+                <a href="#home" class="text-xl font-bold text-gray-900 transition-colors hover:text-blue-700">Shubho Chowdhury</a>
             </div>
             <div class="hidden md:flex space-x-6 items-center">
-                <a href="#home" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Home</a>
-                <a href="#skills" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Skills</a>
-                <a href="#projects" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Projects</a>
-                <a href="#experience" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Experience</a>
-                <a href="#publications" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Highlights</a> 
-                <a href="#education" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Education</a>
-                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition-colors duration-200">Contact</a>
-                <a href="Shubho_Chowdhury_CV.pdf" download="Shubho_Chowdhury_CV.pdf" class="ml-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 shadow hover:shadow-md">Download Resume</a>
+                <a href="#home" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Home</a>
+                <a href="#skills" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Skills</a>
+                <a href="#projects" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Projects</a>
+                <a href="#experience" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Experience</a>
+                <a href="#publications" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Highlights</a>
+                <a href="#education" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Education</a>
+                <a href="#contact" class="text-gray-600 hover:text-gray-900 transition-all duration-200 transform hover:-translate-y-0.5 relative after:content-[''] after:absolute after:w-full after:h-[1px] after:bg-gray-900 after:bottom-[-2px] after:left-0 after:scale-x-0 after:origin-bottom-left after:transition-transform after:duration-200 hover:after:scale-x-100">Contact</a>
+                <a href="Shubho_Chowdhury_CV.pdf" download="Shubho_Chowdhury_CV.pdf" class="ml-3 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm font-medium transition-all duration-200 shadow hover:shadow-md transform hover:-translate-y-0.5">Download Resume</a>
+            </div>
             <div class="md:hidden">
                 <button id="mobile-menu-button" class="text-gray-600 hover:text-gray-900 focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </nav>
-        <div id="mobile-menu" class="md:hidden hidden px-6 pb-3 space-y-1">
-            <a href="#home" class="block text-gray-600 hover:text-gray-900 py-1">Home</a>
-            <a href="#skills" class="block text-gray-600 hover:text-gray-900 py-1">Skills</a>
-            <a href="#projects" class="block text-gray-600 hover:text-gray-900 py-1">Projects</a>
-            <a href="#experience" class="block text-gray-600 hover:text-gray-900 py-1">Experience</a>
-            <a href="#publications" class="block text-gray-600 hover:text-gray-900 py-1">Highlights</a>
-            <a href="#education" class="block text-gray-600 hover:text-gray-900 py-1">Education</a>
-            <a href="#contact" class="block text-gray-600 hover:text-gray-900 py-1">Contact</a>
+        <div id="mobile-menu" class="md:hidden hidden px-6 pb-3 space-y-1 border-t border-gray-200">
+            <a href="#home" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Home</a>
+            <a href="#skills" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Skills</a>
+            <a href="#projects" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Projects</a>
+            <a href="#experience" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Experience</a>
+            <a href="#publications" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Highlights</a>
+            <a href="#education" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Education</a>
+            <a href="#contact" class="block text-gray-600 hover:bg-gray-100 rounded px-3 py-2">Contact</a>
             <a href="Shubho_Chowdhury_CV.pdf" download="Shubho_Chowdhury_CV.pdf" class="block bg-blue-600 hover:bg-blue-700 text-white text-center px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 mt-2">Download Resume</a>
         </div>
     </header>
 
     <main class="container mx-auto px-6 py-12">
 
-        <!-- Home Section (No Changes) -->
-        <section id="home" class="min-h-[80vh] flex flex-col md:flex-row items-center justify-center text-center md:text-left py-16 md:py-24">
-            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        <section id="home" class="min-h-[80vh] flex flex-col md:flex-row items-center justify-center text-center md:text-left py-16 md:py-24 overflow-hidden"> 
+            <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10 animate-slide-right"> 
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
                     Shubho Chowdhury: Software & Machine Learning Engineer
                 </h1>
                 <h2 class="text-xl md:text-2xl text-blue-700 font-semibold mb-6">
@@ -109,23 +141,22 @@
                 </h2>
                 <p class="text-lg text-gray-700 mb-8 leading-relaxed">
                     Hello! I'm Shubho Chowdhury, a dedicated and results-oriented IT professional currently pursuing a Master of Information Technology at Central Queensland University, focusing on Software Development and Machine Learning. With a strong academic foundation (Bachelor's CGPA 3.91/4.00) and practical experience as a Junior Software Engineer, I possess a robust skill set encompassing Python, Java, C++, Deep Learning frameworks (Tensorflow), and web technologies (Django, HTML, CSS). My experience includes designing and training machine learning models (YOLOv5) for image processing, developing full-stack applications, and pioneering novel Federated Learning models for privacy-sensitive domains like finance and healthcare. I am passionate about leveraging technology to solve complex problems, evidenced by my published research and contributions to competitive programming and cybersecurity communities. I am actively seeking opportunities where I can apply my skills in Machine Learning, Computer Vision, and Software Development to create impactful solutions. Explore my work below!
-                    </p>
+                </p>
                 <div class="space-x-4">
-                    <a href="#projects" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-colors duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">View Projects</a>
-                    <a href="#contact" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-md font-medium transition-colors duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Contact Me</a>
+                    <a href="#projects" class="button-primary">View Projects</a>
+                    <a href="#contact" class="button-secondary">Contact Me</a>
                 </div>
             </div>
-            <div class="md:w-1/3 flex justify-center">
-                <img src="https://placehold.co/400x400/E2E8F0/AAAAAA?text=Your+Photo" alt="Shubho Chowdhury - Professional Photo Placeholder" class="rounded-full shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white">
-                </div>
+            <div class="md:w-1/3 flex justify-center animate-slide-left delay-100"> 
+                <img src="https://placehold.co/400x400/E2E8F0/AAAAAA?text=Your+Photo" alt="Shubho Chowdhury - Professional Photo Placeholder" class="rounded-full shadow-xl w-64 h-64 md:w-80 md:h-80 object-cover border-4 border-white transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-2xl">
+            </div>
         </section>
 
-        <!-- Skills Section (REVISED) -->
-        <section id="skills" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg">
-            <h2 class="section-title">Technical Skills</h2>
-            <div class="max-w-5xl mx-auto space-y-10">
+        <section id="skills" class="py-16 md:py-24 bg-gradient-to-br from-gray-100 to-sky-50 -mx-6 px-6 rounded-lg shadow-inner"> 
+            <h2 class="section-title animate-slide-up">Technical Skills</h2>
+            <div class="max-w-5xl mx-auto space-y-12"> 
 
-                <div>
+                <div class="animate-slide-up delay-100 group"> 
                     <h3 class="section-subtitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
                         Programming Languages
@@ -139,7 +170,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="animate-slide-up delay-200 group">
                     <h3 class="section-subtitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-template"><rect width="18" height="7" x="3" y="3" rx="1"/><rect width="9" height="7" x="3" y="14" rx="1"/><rect width="5" height="7" x="16" y="14" rx="1"/></svg>
                         Web & Frameworks
@@ -149,7 +180,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="animate-slide-up delay-300 group">
                     <h3 class="section-subtitle">
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain-circuit"><path d="M12 4a8 8 0 0 0-6.81 11.2"/><path d="M12 4a8 8 0 0 1 6.81 11.2"/><path d="M12 21a8.01 8.01 0 0 0 6.81-11.2"/><path d="M12 21a8.01 8.01 0 0 1-6.81-11.2"/><path d="M5.19 11.2a8.01 8.01 0 0 1 13.62 0"/><path d="M5.19 12.8a8.01 8.01 0 0 0 13.62 0"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="4" r="1"/><circle cx="19.07" cy="7.93" r="1"/><circle cx="19.07" cy="16.07" r="1"/><circle cx="12" cy="20" r="1"/><circle cx="4.93" cy="16.07" r="1"/><circle cx="4.93" cy="7.93" r="1"/></svg>
                         Machine Learning / AI
@@ -166,17 +197,17 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="animate-slide-up delay-400 group">
                      <h3 class="section-subtitle">
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-database"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
                         Databases
                     </h3>
                     <div class="flex flex-wrap gap-y-1">
-                        <span class="skill-tag">MySQL <span class="text-xs text-sky-600 font-normal">(Inferred)</span></span> 
+                        <span class="skill-tag">MySQL <span class="text-xs text-sky-600 font-normal">(Inferred)</span></span>
                     </div>
                 </div>
 
-                <div>
+                <div class="animate-slide-up delay-500 group">
                     <h3 class="section-subtitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal-square"><path d="M7 11v2a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-2"/><path d="M11 11V9"/><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/></svg>
                         Tools & Platforms
@@ -188,7 +219,7 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="animate-slide-up delay-500 group"> 
                     <h3 class="section-subtitle">
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-braces"><path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5a2 2 0 0 1 2-2 2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/></svg>
                         Core Concepts
@@ -201,79 +232,91 @@
             </div>
         </section>
 
-        <!-- Projects Section (No Changes to Structure) -->
         <section id="projects" class="py-16 md:py-24">
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title animate-slide-up">Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <div class="card flex flex-col">
-                    <img src="https://placehold.co/600x400/E0F2FE/3B82F6?text=Biosensor+Project" alt="Biosensor Project Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                
+                <div class="card flex flex-col project-card animate-slide-up delay-100">
+                    <div class="overflow-hidden rounded-md mb-4"> 
+                        <img src="https://placehold.co/600x400/E0F2FE/3B82F6?text=Biosensor+Project" alt="Biosensor Project Placeholder" class="object-cover h-48 w-full">
+                    </div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Biosensor with Deep Learning</h3>
                     <p class="text-gray-700 mb-4 text-sm flex-grow">Designed a highly sensitive multi-channel SPR-PCF based biosensor. Collected data and trained a DL model to predict six key optical properties. Published findings in a Q1 journal.</p>
                      <div class="mt-auto pt-4 border-t border-gray-200">
                         <span class="badge">Deep Learning</span> <span class="badge">Biosensor Design</span> <span class="badge">Python</span> <span class="badge">Q1 Publication</span>
-                        <div class="mt-3">
-                            <a href="[Link to Publication]" target="_blank" rel="noopener noreferrer" class="link-style mr-4 text-sm">Publication</a>
+                        <div class="mt-3 space-x-4"> 
+                            <a href="[Link to Publication]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">Publication</a>
                             <a href="[Link to GitHub Repo, if applicable]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card flex flex-col">
-                     <img src="https://placehold.co/600x400/D1FAE5/10B981?text=Open+Banking+FL" alt="Open Banking FL Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                <div class="card flex flex-col project-card animate-slide-up delay-200">
+                     <div class="overflow-hidden rounded-md mb-4">
+                        <img src="https://placehold.co/600x400/D1FAE5/10B981?text=Open+Banking+FL" alt="Open Banking FL Placeholder" class="object-cover h-48 w-full">
+                    </div>
                      <h3 class="text-xl font-semibold mb-2 text-gray-800">Open Banking with Federated Learning</h3>
                     <p class="text-gray-700 mb-4 text-sm flex-grow">Pioneered a robust federated learning model for the banking sector using financial data, ensuring privacy-preserving, scalable, and secure analysis. Advanced open banking via cutting-edge FL techniques.</p>
                     <div class="mt-auto pt-4 border-t border-gray-200">
                         <span class="badge">Federated Learning</span> <span class="badge">FinTech</span> <span class="badge">Privacy-Preserving AI</span> <span class="badge">Python</span>
-                         <div class="mt-3">
+                         <div class="mt-3 space-x-4">
                             <a href="[Link to GitHub Repo, if applicable]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
-                            </div>
+                         </div>
                     </div>
                 </div>
 
-                <div class="card flex flex-col">
-                    <img src="https://placehold.co/600x400/EDE9FE/8B5CF6?text=Sleep+Apnea+FL" alt="Sleep Apnea FL Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                <div class="card flex flex-col project-card animate-slide-up delay-300">
+                    <div class="overflow-hidden rounded-md mb-4">
+                        <img src="https://placehold.co/600x400/EDE9FE/8B5CF6?text=Sleep+Apnea+FL" alt="Sleep Apnea FL Placeholder" class="object-cover h-48 w-full">
+                    </div>
                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Sleep Apnea Detection with Federated Learning</h3>
                     <p class="text-gray-700 mb-4 text-sm flex-grow">Designed a novel federated learning model using ECG data to detect sleep apnea. Enabled privacy-preserving, scalable analysis across distributed datasets with enhanced accuracy via advanced ML techniques.</p>
                     <div class="mt-auto pt-4 border-t border-gray-200">
                         <span class="badge">Federated Learning</span> <span class="badge">Healthcare AI</span> <span class="badge">ECG Analysis</span> <span class="badge">Python</span> <span class="badge">Tensorflow</span>
-                        <div class="mt-3">
+                        <div class="mt-3 space-x-4">
                             <a href="[Link to GitHub Repo, if applicable]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
-                             </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="card flex flex-col">
-                    <img src="https://placehold.co/600x400/FEF3C7/F59E0B?text=Family+Support+System" alt="Family Support System Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
+                <div class="card flex flex-col project-card animate-slide-up delay-100 md:delay-400"> 
+                    <div class="overflow-hidden rounded-md mb-4">
+                        <img src="https://placehold.co/600x400/FEF3C7/F59E0B?text=Family+Support+System" alt="Family Support System Placeholder" class="object-cover h-48 w-full">
+                    </div>
                      <h3 class="text-xl font-semibold mb-2 text-gray-800">Family Support System</h3>
                     <p class="text-gray-700 mb-4 text-sm flex-grow">JavaFX desktop application for registering families, managing events, and secure user authentication using encrypted client-server communication.</p>
                     <div class="mt-auto pt-4 border-t border-gray-200">
                         <span class="badge">Java</span> <span class="badge">JavaFX</span> <span class="badge">MySQL</span> <span class="badge">Maven</span> <span class="badge">Desktop App</span>
-                        <div class="mt-3">
+                        <div class="mt-3 space-x-4">
                             <a href="[Link to GitHub Repo]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card flex flex-col">
-                    <img src="https://placehold.co/600x400/FEE2E2/EF4444?text=Neural+Style+Transfer" alt="Neural Style Transfer Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
-                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Neural Style Transfer</h3>
+                <div class="card flex flex-col project-card animate-slide-up delay-200 md:delay-500">
+                    <div class="overflow-hidden rounded-md mb-4">
+                        <img src="https://placehold.co/600x400/FEE2E2/EF4444?text=Neural+Style+Transfer" alt="Neural Style Transfer Placeholder" class="object-cover h-48 w-full">
+                     </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Neural Style Transfer</h3>
                     <p class="text-gray-700 mb-4 text-sm flex-grow">Applied artistic styles to images, videos, and webcam feeds. Utilized neural style transfer to create cartoon-like images.</p>
                     <div class="mt-auto pt-4 border-t border-gray-200">
                         <span class="badge">Deep Learning</span> <span class="badge">Computer Vision</span> <span class="badge">Python</span> <span class="badge">Style Transfer</span>
-                        <div class="mt-3">
+                        <div class="mt-3 space-x-4">
                             <a href="[Link to GitHub Repo]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="card flex flex-col">
-                    <img src="https://placehold.co/600x400/DBEAFE/3B82F6?text=Traffic+Sign+Detection" alt="Traffic Sign Detection Placeholder" class="rounded-md mb-4 object-cover h-48 w-full">
-                     <h3 class="text-xl font-semibold mb-2 text-gray-800">Traffic Signs Detection</h3>
+                <div class="card flex flex-col project-card animate-slide-up delay-300 md:delay-[600ms]"> 
+                    <div class="overflow-hidden rounded-md mb-4">
+                         <img src="https://placehold.co/600x400/DBEAFE/3B82F6?text=Traffic+Sign+Detection" alt="Traffic Sign Detection Placeholder" class="object-cover h-48 w-full">
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-800">Traffic Signs Detection</h3>
                     <p class="text-gray-700 mb-4 text-sm flex-grow">A deep learning guide/project for classifying traffic signs in images, relevant for autonomous vehicles and road safety applications.</p>
                     <div class="mt-auto pt-4 border-t border-gray-200">
                         <span class="badge">Deep Learning</span> <span class="badge">Computer Vision</span> <span class="badge">Python</span> <span class="badge">Image Classification</span>
-                         <div class="mt-3">
+                         <div class="mt-3 space-x-4">
                             <a href="[Link to GitHub Repo]" target="_blank" rel="noopener noreferrer" class="link-style text-sm">GitHub Repo</a>
                         </div>
                     </div>
@@ -281,50 +324,48 @@
 
             </div> </section>
 
-        <!-- Experience Section (No Changes) -->
-        <section id="experience" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg">
-            <h2 class="section-title">Professional Experience</h2>
+        <section id="experience" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg shadow-inner">
+            <h2 class="section-title animate-slide-up">Professional Experience</h2>
             <div class="max-w-3xl mx-auto">
-                <div class="card mb-8">
-                    <div class="flex justify-between items-start mb-2 flex-wrap"> 
+                <div class="card mb-8 animate-slide-up delay-100"> 
+                    <div class="flex justify-between items-start mb-2 flex-wrap">
                         <div>
                             <h3 class="text-xl font-semibold text-gray-800">Junior Software Engineer</h3>
                             <p class="text-gray-700">REEA Digital Limited</p>
                             <p class="text-sm text-gray-500">Dhaka, Bangladesh</p>
                         </div>
-                        <span class="text-sm text-gray-600 font-medium mt-2 sm:mt-0">July 2023 – Jan 2024</span> 
+                        <span class="text-sm text-gray-600 font-medium mt-2 sm:mt-0">July 2023 – Jan 2024</span>
                     </div>
                      <ul class="list-disc list-inside text-gray-700 space-y-2 mt-4">
                         <li>Designed and trained YOLOv5 machine learning models for image processing tasks, including dataset creation and optimization.</li>
                         <li>Integrated LangChain for developing language model applications.</li>
                         <li>Supported proof-of-concept projects utilizing ComfyUI and Stable Diffusion.</li>
                         <li>Collaborated effectively on developing and deploying scalable machine learning solutions.</li>
-                        </ul>
+                    </ul>
                 </div>
-                </div>
+            </div>
         </section>
 
-        <!-- Publications, Achievements & Certificates Section (REVISED) -->
         <section id="publications" class="py-16 md:py-24">
-             <h2 class="section-title">Highlights & Achievements</h2> 
-             <div class="max-w-4xl mx-auto space-y-16"> 
+             <h2 class="section-title animate-slide-up">Highlights & Achievements</h2>
+             <div class="max-w-4xl mx-auto space-y-16">
 
-                 <div>
+                 <div class="animate-slide-up delay-100 group"> 
                      <h3 class="section-subtitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open-text"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/><path d="M6 8h2"/><path d="M6 12h2"/><path d="M16 8h2"/><path d="M16 12h2"/></svg>
                         Publications
                      </h3>
-                     <div class="space-y-6"> 
+                     <div class="space-y-6">
                         <div class="publication-item">
-                             <p class="text-gray-800 font-semibold mb-1.5"> 
+                             <p class="text-gray-800 font-semibold mb-1.5">
                                 "A highly sensitive multi-channel SPR-PCF based biosensor with deep learning prediction approach"
                              </p>
-                             <p class="text-sm text-gray-600 mb-3"> 
+                             <p class="text-sm text-gray-600 mb-3">
                                 Published in a Q1 Journal - Demonstrates expertise in biosensor design, data modeling, and applying deep learning to predict complex optical properties.
                              </p>
-                             <a href="[Link to Publication]" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-style bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-md transition-colors duration-200"> 
+                             <a href="[Link to Publication]" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm link-style bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-md transition-colors duration-200 group"> 
                                 View Publication
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right ml-1.5"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right ml-1.5 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg> 
                              </a>
                         </div>
                          <div class="publication-item">
@@ -334,38 +375,38 @@
                      </div>
                  </div>
 
-                 <div>
+                 <div class="animate-slide-up delay-200 group">
                      <h3 class="section-subtitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trophy"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
                         Achievements & Contributions
                      </h3>
-                     <div class="space-y-5"> 
-                         <div class="achievement-item">
+                     <div class="space-y-5">
+                         <div class="achievement-item group"> 
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
                              <div>
                                  <p class="text-gray-800 font-medium">1000+ Coding Problems Solved</p>
                                  <p class="text-sm text-gray-600 mt-1">Demonstrated strong problem-solving skills and proficiency in algorithms and data structures across platforms like LeetCode & StopStalk.</p>
-                                 <div class="mt-2">
-                                     <a href="https://leetcode.com/u/shubho_chowdhury/" target="_blank" rel="noopener noreferrer" class="link-style text-sm mr-4">LeetCode Profile</a>
+                                 <div class="mt-2 space-x-4">
+                                     <a href="https://leetcode.com/u/shubho_chowdhury/" target="_blank" rel="noopener noreferrer" class="link-style text-sm">LeetCode Profile</a>
                                      <a href="https://www.stopstalk.com/user/profile/Shubho_c47" target="_blank" rel="noopener noreferrer" class="link-style text-sm">StopStalk Profile</a>
                                  </div>
                              </div>
                          </div>
-                         <div class="achievement-item">
+                         <div class="achievement-item group">
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                              <div>
                                  <p class="text-gray-800 font-medium">Active Competitive Programmer</p>
                                  <p class="text-sm text-gray-600 mt-1">Participated in numerous online and onsite competitive programming contests, honing algorithmic thinking and coding efficiency under pressure.</p>
                              </div>
                          </div>
-                         <div class="achievement-item">
+                         <div class="achievement-item group">
                               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-edit"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4Z"/></svg>
                              <div>
                                  <p class="text-gray-800 font-medium">Contest Question Setter (University)</p>
                                  <p class="text-sm text-gray-600 mt-1">Developed challenging problems for university-level competitive programming contests, contributing to the local coding community.</p>
                              </div>
                          </div>
-                         <div class="achievement-item">
+                         <div class="achievement-item group">
                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>
                              <div>
                                 <p class="text-gray-800 font-medium">Question Setter (DEF CON CTF)</p>
@@ -375,119 +416,166 @@
                     </div>
                  </div>
 
-                 <div>
+                 <div class="animate-slide-up delay-300 group">
                      <h3 class="section-subtitle">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
                         Certificates
                      </h3>
-                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                         <div class="certificate-item group"> 
-                            <div class="flex items-center flex-grow mr-4"> 
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-5"> 
+                         <div class="certificate-item group">
+                            <div class="flex items-center flex-grow mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
-                                <span class="text-gray-800 font-medium ml-3">Python Django - The Practical Guide</span> 
+                                <span class="text-gray-800 font-medium ml-3">Python Django - The Practical Guide</span>
                             </div>
-                            <a href="[Link to Certificate Django]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap">View Certificate</a> 
+                            <a href="[Link to Certificate Django]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap pl-2"> 
+                                View
+                                <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">-></span> 
+                            </a>
                          </div>
                          <div class="certificate-item group">
                             <div class="flex items-center flex-grow mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
                                 <span class="text-gray-800 font-medium ml-3">Convolutional Neural Networks</span>
                             </div>
-                             <a href="[Link to Certificate CNN]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap">View Certificate</a>
+                             <a href="[Link to Certificate CNN]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap pl-2">
+                                View
+                                <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">-></span>
+                             </a>
                          </div>
                          <div class="certificate-item group">
                              <div class="flex items-center flex-grow mr-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check-2"><path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"/><polyline points="14 2 14 8 20 8"/><path d="m3 15 2 2 4-4"/></svg>
                                 <span class="text-gray-800 font-medium ml-3">Neural Networks and Deep Learning</span>
                              </div>
-                             <a href="[Link to Certificate NN & DL]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap">View Certificate</a>
+                             <a href="[Link to Certificate NN & DL]" target="_blank" rel="noopener noreferrer" class="link-style text-sm whitespace-nowrap pl-2">
+                                View
+                                <span class="inline-block transition-transform duration-200 group-hover:translate-x-1">-></span>
+                             </a>
                          </div>
                     </div>
                  </div>
              </div>
         </section>
 
-        <!-- Education Section (No Changes) -->
-        <section id="education" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg">
-            <h2 class="section-title">Education</h2>
+        <section id="education" class="py-16 md:py-24 bg-gray-100 -mx-6 px-6 rounded-lg shadow-inner">
+            <h2 class="section-title animate-slide-up">Education</h2>
             <div class="max-w-3xl mx-auto space-y-8">
-                 <div class="card">
+                 <div class="card animate-slide-up delay-100">
                     <h3 class="text-xl font-semibold text-gray-800">Master of Information Technology</h3>
                     <p class="text-gray-700">Central Queensland University, Sydney, Australia</p>
                     <p class="text-sm text-gray-600 mb-2">Feb 2024 – Present</p>
                     <p class="text-gray-700">Focus Areas: Software Development and Machine Learning</p>
                     </div>
-                 <div class="card">
+                 <div class="card animate-slide-up delay-200">
                     <h3 class="text-xl font-semibold text-gray-800">Bachelor of Information Technology</h3>
                     <p class="text-gray-700">University of Information Technology and Sciences (UITS), Dhaka, Bangladesh</p>
                     <p class="text-sm text-gray-600 mb-2">Jan 2019 – Mar 2023</p>
-                    <p class="text-gray-700 font-medium">CGPA: 3.91 / 4.00</p>
-                     </div>
+                    <p class="text-gray-700 font-medium">CGPA: <span class="text-blue-700">3.91 / 4.00</span></p> 
+                </div>
             </div>
         </section>
 
-        <!-- Contact Section (No Changes) -->
         <section id="contact" class="py-16 md:py-24">
-            <h2 class="section-title">Get In Touch</h2>
+            <h2 class="section-title animate-slide-up">Get In Touch</h2>
             <div class="max-w-2xl mx-auto text-center">
-                <p class="text-lg text-gray-700 mb-8">
+                <p class="text-lg text-gray-700 mb-8 animate-slide-up delay-100">
                     I'm passionate about leveraging technology to build innovative solutions and currently seeking opportunities in Software Development and Machine Learning. Feel free to reach out!
                 </p>
-                <div class="space-y-4">
-                    <p class="text-gray-800">
+                <div class="space-y-5 animate-slide-up delay-200"> 
+                    <p class="text-gray-800 text-lg"> 
                         <strong class="font-medium">Email:</strong> <a href="mailto:shubhoc47@gmail.com" class="link-style">shubhoc47@gmail.com</a>
-                         </p>
+                    </p>
                     <p class="text-gray-800">
-                        <strong class="font-medium">Location:</strong> Campsie, NSW, Australia <span class="text-sm text-gray-500">(City/State only)</span>
-                        </p>
-                    <div class="flex justify-center space-x-6 pt-4">
-                         <a href="https://linkedin.com/in/shubho-chowdhury-54137218a" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-700 transition-colors duration-200 transform hover:scale-110">
+                        <strong class="font-medium">Location:</strong> Campsie, NSW, Australia <span class="text-sm text-gray-500">(Available for opportunities across Australia)</span> 
+                    </p>
+                    <div class="flex justify-center space-x-8 pt-4 animate-slide-up delay-300"> 
+                         <a href="https://linkedin.com/in/shubho-chowdhury-54137218a" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-700 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1" title="LinkedIn"> 
                              <span class="sr-only">LinkedIn</span>
-                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                             <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
                          </a>
-                          <a href="https://github.com/shubhoc47" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-900 transition-colors duration-200 transform hover:scale-110">
+                          <a href="https://github.com/shubhoc47" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-gray-900 transition-all duration-300 transform hover:scale-110 hover:-translate-y-1" title="GitHub"> 
                              <span class="sr-only">GitHub</span>
-                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.201 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.309.678.92.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
+                             <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.951 0-1.093.39-1.988 1.03-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.201 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.309.678.92.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"/></svg>
                          </a>
-                         </div>
+                    </div>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 py-8 mt-16">
+    <footer class="bg-gray-800 text-gray-400 py-8 mt-16"> 
         <div class="container mx-auto px-6 text-center">
-            <div class="mb-4 flex justify-center space-x-6">
-                 <a href="https://linkedin.com/in/shubho-chowdhury-54137218a" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">LinkedIn</a>
-                 <a href="https://github.com/shubhoc47" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">GitHub</a>
-                 <a href="https://leetcode.com/u/shubho_chowdhury/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">LeetCode</a>
-                 <a href="https://www.stopstalk.com/user/profile/Shubho_c47" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200">StopStalk</a>
+            <div class="mb-4 flex justify-center flex-wrap gap-x-6 gap-y-2"> 
+                 <a href="https://linkedin.com/in/shubho-chowdhury-54137218a" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200 transform hover:-translate-y-0.5 inline-block">LinkedIn</a>
+                 <a href="https://github.com/shubhoc47" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200 transform hover:-translate-y-0.5 inline-block">GitHub</a>
+                 <a href="https://leetcode.com/u/shubho_chowdhury/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200 transform hover:-translate-y-0.5 inline-block">LeetCode</a>
+                 <a href="https://www.stopstalk.com/user/profile/Shubho_c47" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors duration-200 transform hover:-translate-y-0.5 inline-block">StopStalk</a>
             </div>
             <p class="text-sm">© <span id="current-year"></span> Shubho Chowdhury. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // --- Intersection Observer for Scroll Animations ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null, // relative to document viewport
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
 
-        // Basic Mobile Menu Toggle
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (menuButton && mobileMenu) {
-            menuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-
-            // Close menu when a link is clicked
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                     mobileMenu.classList.add('hidden');
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    // Check if element is intersecting
+                    if (entry.isIntersecting) {
+                        // Add the 'is-visible' class to start the animation
+                        entry.target.classList.add('is-visible');
+                        // Remove the observer after animation starts (optional: keeps it from re-triggering)
+                        observer.unobserve(entry.target);
+                    }
                 });
+            };
+
+            // Create the observer
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            // Select all elements to animate
+            const targets = document.querySelectorAll('.animate-slide-up, .animate-slide-left, .animate-slide-right, .animate-fade-in');
+
+            // Observe each target element
+            targets.forEach(target => {
+                observer.observe(target);
             });
-        }
+
+            // --- Existing JS ---
+            // Set current year in footer
+            const currentYearEl = document.getElementById('current-year');
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            }
+
+            // Basic Mobile Menu Toggle
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    // Optional: Add ARIA attribute for accessibility
+                    const isExpanded = !mobileMenu.classList.contains('hidden');
+                    menuButton.setAttribute('aria-expanded', isExpanded);
+                });
+
+                // Close menu when a link is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                         mobileMenu.classList.add('hidden');
+                         menuButton.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        });
     </script>
 
 </body>
